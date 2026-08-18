@@ -1,0 +1,245 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Information System</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        input {
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .delete-btn {
+            background-color: #dc3545;
+        }
+        .delete-btn:hover {
+            background-color: #a71d2a;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        #search {
+            width: 300px;
+        }
+        .pass {
+            color: green;
+            font-weight: bold;
+        }
+        .fail {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <h1>Student Information System</h1>
+    <h2>Add Student</h2>
+    <input type="text" id="name" placeholder="Student Name">
+    <input type="number" id="roll" placeholder="Roll Number">
+    <br>
+    <input type="number" id="marks1" placeholder="Subject 1 Marks">
+    <input type="number" id="marks2" placeholder="Subject 2 Marks">
+    <input type="number" id="marks3" placeholder="Subject 3 Marks">
+    <input type="number" id="marks4" placeholder="Subject 4 Marks">
+    <input type="number" id="marks5" placeholder="Subject 5 Marks">
+    <br>
+    <button onclick="addStudent()">Add Student</button>
+    <hr>
+    <h2>Student Records</h2>
+
+    <input 
+        type="text" 
+        id="search" 
+        placeholder="Search by name or roll number"
+        onkeyup="searchStudent()"
+    >
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Roll Number</th>
+                <th>Subject 1</th>
+                <th>Subject 2</th>
+                <th>Subject 3</th>
+                <th>Subject 4</th>
+                <th>Subject 5</th>
+                <th>Total</th>
+                <th>Percentage</th>
+                <th>Grade</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="studentTable">
+        </tbody>
+    </table>
+</div>
+
+<script>
+    let students = [];
+    function addStudent() {
+
+        let name = document.getElementById("name").value;
+        let roll = document.getElementById("roll").value;
+
+        let marks1 = Number(document.getElementById("marks1").value);
+        let marks2 = Number(document.getElementById("marks2").value);
+        let marks3 = Number(document.getElementById("marks3").value);
+        let marks4 = Number(document.getElementById("marks4").value);
+        let marks5 = Number(document.getElementById("marks5").value);
+
+        let total = marks1 + marks2 + marks3 + marks4 + marks5;
+        let percentage = (total / 500) * 100;
+        let grade = getGrade(percentage);
+        let status = percentage >= 40 ? "Pass" : "Fail";
+
+        let student = {
+            name: name,
+            roll: roll,
+            marks1: marks1,
+            marks2: marks2,
+            marks3: marks3,
+            marks4: marks4,
+            marks5: marks5,
+            total: total,
+            percentage: percentage,
+            grade: grade,
+            status: status
+        };
+
+        students.push(student);
+          displayStudents();
+        document.getElementById("name").value = "";
+        document.getElementById("roll").value = "";
+
+        document.getElementById("marks1").value = "";
+        document.getElementById("marks2").value = "";
+        document.getElementById("marks3").value = "";
+        document.getElementById("marks4").value = "";
+        document.getElementById("marks5").value = "";
+    }
+
+    function getGrade(percentage) {
+        if (percentage >= 90)
+            return "A";
+
+        else if (percentage >= 80)
+            return "B";
+
+        else if (percentage >= 70)
+            return "C";
+
+        else if (percentage >= 60)
+            return "D";
+
+        else if (percentage >= 50)
+            return "E";
+
+        else
+            return "F";
+    }
+    function displayStudents(data = students) {
+        let table = document.getElementById("studentTable");
+        table.innerHTML = "";
+        data.forEach((student) => {
+            let statusClass =
+                student.status === "Pass"
+                ? "pass"
+                : "fail";
+            table.innerHTML += `
+                <tr>
+                    <td>${student.name}</td>
+                    <td>${student.roll}</td>
+                    <td>${student.marks1}</td>
+                    <td>${student.marks2}</td>
+                    <td>${student.marks3}</td>
+                    <td>${student.marks4}</td>
+                    <td>${student.marks5}</td>
+                    <td>${student.total}/500</td>
+                    <td>${student.percentage.toFixed(2)}%</td>
+                    <td>${student.grade}</td>
+                    <td class="${statusClass}">
+                        ${student.status}
+                    </td>
+
+                    <td>
+                        <button 
+                            class="delete-btn"
+                            onclick="deleteStudent(${students.indexOf(student)})">
+                            Delete
+                        </button>
+                    </td>
+
+                </tr>
+            `;
+        });
+    }
+    function deleteStudent(index) {
+        students.splice(index, 1);
+        displayStudents();
+    }
+
+    function searchStudent() {
+        let searchValue =
+            document.getElementById("search").value.toLowerCase();
+        let filteredStudents = students.filter(student =>
+            student.name.toLowerCase().includes(searchValue) ||
+            student.roll.toString().includes(searchValue)
+        );
+
+
+        displayStudents(filteredStudents);
+    }
+
+</script>
+
+</body>
+</html>
+

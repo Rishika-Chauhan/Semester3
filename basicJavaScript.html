@@ -5,8 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Basic Of JavaScript</title>
     <script>
-        let a=75;
-        console.log(type a);
+        console.log("Basics of JavaScript");
+        let name = "Rishika ";
+        let age = 25;
+        console.log("Name: " + name);
+        console.log("Age: " + age);
+        console.log(typeof name);
+        console.log(typeof age);
+
+        function sum(){
+            let a=5;
+            let b=7;
+            console.log(a+b);
+        }
+
+        sum();
+
+    let username = prompt("What is your name?"); 
+
+    if (username !== null) {
+    console.log('Hello',username);}
+
+    let section = prompt("What is your section?")
+    if (section>3){ 
+        console.log("Section does not exist");
+    }
+    else{
+        console.log("confirm");
+    }
+
+    let user=confirm("Do you want to continue?");
+    if(user){
+        console.log("user wants to continue.");
+    }
+    else{
+        console.log("user does not want to continue");
+    }
+
+    
     </script>
 </head>
 <body>
