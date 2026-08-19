@@ -105,12 +105,11 @@
             <tr>
                 <th>Name</th>
                 <th>Roll Number</th>
-                <th>Subject 1</th>
-                <th>Subject 2</th>
-                <th>Subject 3</th>
-                <th>Subject 4</th>
-                <th>Subject 5</th>
-                <th>Total</th>
+                <th>ADS</th>
+                <th>OOPs</th>
+                <th>FSD</th>
+                <th>Maths</th>
+                <th>OS</th>
                 <th>Percentage</th>
                 <th>Grade</th>
                 <th>Status</th>
@@ -148,7 +147,6 @@
             marks3: marks3,
             marks4: marks4,
             marks5: marks5,
-            total: total,
             percentage: percentage,
             grade: grade,
             status: status
@@ -190,9 +188,7 @@
         table.innerHTML = "";
         data.forEach((student) => {
             let statusClass =
-                student.status === "Pass"
-                ? "pass"
-                : "fail";
+                student.status === "Pass" ? "pass" : "fail";
             table.innerHTML += `
                 <tr>
                     <td>${student.name}</td>
@@ -202,7 +198,6 @@
                     <td>${student.marks3}</td>
                     <td>${student.marks4}</td>
                     <td>${student.marks5}</td>
-                    <td>${student.total}/500</td>
                     <td>${student.percentage.toFixed(2)}%</td>
                     <td>${student.grade}</td>
                     <td class="${statusClass}">
