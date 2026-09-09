@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mouse Events</title>
+    <style>
+        #box{
+            height:300px;
+            width:300px;
+            background-color: teal;
+            margin:200px 0 0 100px;
+            border:5px solid black;
+        }
+    </style>
+    <script>
+        function eventcall(){
+            alert('Mai hu ek udta robot.... Doraemon  😼')
+        }
+
+        function events(){
+            alert('Happy happy happy.....😺')
+        }
+
+        function oops(){
+            alert('Yeh haseen vadayi... Yeh khula aasman .....🏔️')
+        }
+    </script>
+</head>
+<body>
+    <div id="box" onclick="eventcall()" oncontextmenu="events()">This is section A</div>
+    <p id="para" onmouseover="eventcall()">This is the FSD class</p>
+    <p id="para" onmouseup="events()">I want to eat chocolate</p>
+    <p id="para" onmousedown="oops()">when I move down it will show a text</p>
+
+    
+</body>
+</html>
