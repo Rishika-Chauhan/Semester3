@@ -59,7 +59,7 @@ async function renameFile(){
 
 async function deleteFile(){
     try{
-        await fs.unlink("promise_new.txt");
+        await fs.unlink("promiseStudent.txt");
         console.log("File deleted successfully");
     }
     catch(error){
