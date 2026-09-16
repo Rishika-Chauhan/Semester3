@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 1 - Quiz Challenge</title>
+    <link rel="stylesheet" href="quiz.css">
+</head>
+<body>
+    <main>
+    <section class="login-container">
+        <h1 style="align-items: center; justify-content: center;">FSD Quiz</h1>
+        <p>Enter your details to start the quiz.</p>
+        <form id="login">
+            <label for="name">Name</label>
+            <input type="text" id="name" required>
+            <label for="rollNo">Roll No</label>
+            <input type="text" id="rollNo" name="rollNo" required>
+            <p>Section:</p>
+            <label class="section-option"><input type="radio" name="section" value="A" required> A</label>
+            <label class="section-option"><input type="radio" name="section" value="B"> B</label>
+            <label class="section-option"><input type="radio" name="section" value="C"> C</label>
+            <button type="submit" class="button">Start Quiz</button>
+        </form>
+    </section>
+
+    <section class="quiz-container hidden">
+        <h2>FSD Quiz</h2>
+        <p>Time left: <span id="timer">20</span> seconds</p>
+        <p id="progress"></p>
+        <div id="questions"></div>
+        <p id="feedback"></p>
+        <div class="actions">
+            <button id="submit" class="button" type="button">Submit</button>
+            <button id="next" class="button secondary hidden" type="button">Next</button>
+        </div>
+    </section>
+
+    <section class="result-container hidden">
+        <h2>Quiz Complete</h2>
+        <p id="result"></p>
+        <button id="restart" class="button" type="button">Restart Quiz</button>
+    </section>
+    </main>
+
+    <script src="quiz.js"></script>
+</body>
+</html>
