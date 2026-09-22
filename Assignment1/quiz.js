@@ -3,7 +3,7 @@ const questions = [
     ['Which method adds an item to the end of an array?', ['shift()', 'push()', 'pop()', 'slice()'], 'push()'],
     ['What does DOM stand for?', ['Document Object Model', 'Data Object Method', 'Digital Ordinance Model', 'Document Order Map'], 'Document Object Model'],
     ['Which operator is used for strict equality in JavaScript?', ['==', '===', '=', '!='], '==='],
-    ['Which HTML tag is used to create an unordered list?', ['<ul>', '<ol>', '<li>', '<list>'], '<ul>'],
+    ['Which HTML tag is used to create an unordered list?', ["<ul>", "<ol>", "<li>", "<list>"], "<ul>"],
     ['What does CSS stand for?', ['Computer Style Sheets', 'Cascading Style Sheets', 'Creative Style Syntax', 'Colorful Style System'], 'Cascading Style Sheets'],
     ['Which keyword is used to declare a constant in JavaScript?', ['let', 'var', 'const', 'static'], 'const'],
     ['Which property changes the text color in CSS?', ['background-color', 'font-style', 'color', 'text-align'], 'color'],
@@ -50,10 +50,28 @@ function renderQuestion() {
     submitButton.disabled = false;
     submitButton.classList.remove('hidden');
     nextButton.classList.add('hidden');
-    questionContainer.innerHTML = '<h3>' + question[0] + '</h3>';
+
+    questionContainer.replaceChildren();
+
+    const heading = document.createElement('h3');
+    heading.textContent = question[0];
+    questionContainer.appendChild(heading);
+
     for (let i = 0; i < question[1].length; i++) {
-        questionContainer.innerHTML += '<label class="answer-option"><input type="radio" name="answer" value="' + question[1][i] + '"> ' + question[1][i] + '</label>';
+        const label = document.createElement('label');
+        label.className = 'answer-option';
+
+        const input = document.createElement('input');
+        input.type = 'radio';
+        input.name = 'answer';
+        input.value = question[1][i];
+
+        const text = document.createTextNode(' ' + question[1][i]);
+        label.appendChild(input);
+        label.appendChild(text);
+        questionContainer.appendChild(label);
     }
+
     const options = document.querySelectorAll('.answer-option');
     options.forEach(function (option) {
         option.addEventListener('click', function () {
