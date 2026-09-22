@@ -9,7 +9,7 @@
 <body>
     <main>
     <section class="login-container">
-        <h1 style="align-items: center; justify-content: center;">FSD Quiz</h1>
+        <h1>Full Stack Development Quiz</h1>
         <p>Enter your details to start the quiz.</p>
         <form id="login">
             <label for="name">Name</label>
@@ -37,8 +37,13 @@
     </section>
 
     <section class="result-container hidden">
-        <h2>Quiz Complete</h2>
-        <p id="result"></p>
+        <div class="result-header">
+            <span class="result-badge">Quiz Complete</span>
+            <h2>Great work!</h2>
+        </div>
+        <p id="student-info" class="student-info"></p>
+        <p id="result" class="result-score"></p>
+        <p id="result-message" class="result-message"></p>
         <button id="restart" class="button" type="button">Restart Quiz</button>
     </section>
     </main>
