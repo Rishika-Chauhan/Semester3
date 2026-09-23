@@ -1,0 +1,8 @@
+body { margin: 0; background: #f2f5f3; color: #182b2b; font-family: Arial, sans-serif; }
+.container { width: min(520px, calc(100% - 32px)); margin: 120px auto; padding: 32px; box-sizing: border-box; text-align: center; background: white; border: 1px solid #d7e1dd; border-radius: 8px; box-shadow: 0 8px 20px rgba(24, 43, 43, .08); }
+h1 { margin: 0 0 28px; font-size: 28px; }
+.buttons { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+button { padding: 11px 18px; border: 0; border-radius: 5px; background: #176b63; color: white; font-size: 15px; cursor: pointer; }
+button:hover { background: #0d4f49; }
+button:focus-visible { outline: 3px solid #9bd4c4; outline-offset: 2px; }
+#message { min-height: 20px; margin: 25px 0 0; color: #176b63; font-weight: bold; }

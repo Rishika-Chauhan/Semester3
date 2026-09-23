@@ -1,14 +1,14 @@
 const questions = [
     ['Which language is used to style web pages?', ['HTML', 'CSS', 'JavaScript', 'Python'], 'CSS'],
     ['Which method adds an item to the end of an array?', ['shift()', 'push()', 'pop()', 'slice()'], 'push()'],
-    ['What does DOM stand for?', ['Document Object Model', 'Data Object Method', 'Digital Ordinance Model', 'Document Order Map'], 'Document Object Model'],
+    ['What does DOM stand for?', null, 'Document Object Model'],
     ['Which operator is used for strict equality in JavaScript?', ['==', '===', '=', '!='], '==='],
     ['Which HTML tag is used to create an unordered list?', ["<ul>", "<ol>", "<li>", "<list>"], "<ul>"],
-    ['What does CSS stand for?', ['Computer Style Sheets', 'Cascading Style Sheets', 'Creative Style Syntax', 'Colorful Style System'], 'Cascading Style Sheets'],
+    ['What does CSS stand for?', null, 'Cascading Style Sheets'],
     ['Which keyword is used to declare a constant in JavaScript?', ['let', 'var', 'const', 'static'], 'const'],
     ['Which property changes the text color in CSS?', ['background-color', 'font-style', 'color', 'text-align'], 'color'],
     ['Which method converts a JSON string into a JavaScript object?', ['JSON.parse()', 'JSON.stringify()', 'JSON.convert()', 'JSON.read()'], 'JSON.parse()'],
-    ['What does API stand for?', ['Application Programming Interface', 'Automated Program Instruction', 'Advanced Program Integration', 'Application Process Input'], 'Application Programming Interface']
+    ['What does API stand for?', null, 'Application Programming Interface']
 ];
 
 const loginForm = document.getElementById('login');
@@ -57,28 +57,41 @@ function renderQuestion() {
     heading.textContent = question[0];
     questionContainer.appendChild(heading);
 
-    for (let i = 0; i < question[1].length; i++) {
-        const label = document.createElement('label');
-        label.className = 'answer-option';
+    if (question[1]) {
+        for (let i = 0; i < question[1].length; i++) {
+            const label = document.createElement('label');
+            label.className = 'answer-option';
 
-        const input = document.createElement('input');
-        input.type = 'radio';
-        input.name = 'answer';
-        input.value = question[1][i];
+            const input = document.createElement('input');
+            input.type = 'radio';
+            input.name = 'answer';
+            input.value = question[1][i];
 
-        const text = document.createTextNode(' ' + question[1][i]);
-        label.appendChild(input);
-        label.appendChild(text);
-        questionContainer.appendChild(label);
-    }
+            const text = document.createTextNode(' ' + question[1][i]);
+            label.appendChild(input);
+            label.appendChild(text);
+            questionContainer.appendChild(label);
+        }
 
-    const options = document.querySelectorAll('.answer-option');
-    options.forEach(function (option) {
-        option.addEventListener('click', function () {
-            options.forEach(function (item) { item.classList.remove('selected'); });
-            option.classList.add('selected');
+        const options = document.querySelectorAll('.answer-option');
+        options.forEach(function (option) {
+            option.addEventListener('click', function () {
+                options.forEach(function (item) { item.classList.remove('selected'); });
+                option.classList.add('selected');
+            });
         });
-    });
+    } else {
+        const answerInput = document.createElement('input');
+        answerInput.type = 'text';
+        answerInput.id = 'typed-answer';
+        answerInput.placeholder = 'Type your answer and press Enter';
+        answerInput.autocomplete = 'off';
+        answerInput.addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') submitAnswer();
+        });
+        questionContainer.appendChild(answerInput);
+        answerInput.focus();
+    }
     startTimer();
 }
 
@@ -99,10 +112,12 @@ function submitAnswer() {
     answerSubmitted = true;
     clearInterval(timerId);
     const selected = document.querySelector('input[name="answer"]:checked');
+    const typedAnswer = document.getElementById('typed-answer');
     const correctAnswer = questions[currentQuestion][2];
-    if (selected && selected.value === correctAnswer) score += 1;
+    const answer = selected ? selected.value : typedAnswer ? typedAnswer.value.trim() : '';
+    if (answer.toLowerCase() === correctAnswer.toLowerCase()) score += 1;
 
-    const message = selected ? 'Answer submitted.' : 'Time is up! No answer was selected.';
+    const message = answer ? 'Answer submitted.' : 'Time is up! No answer was selected.';
     document.getElementById('feedback').textContent = message;
     submitButton.disabled = true;
     submitButton.classList.add('hidden');

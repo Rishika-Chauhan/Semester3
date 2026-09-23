@@ -45,6 +45,17 @@ input[type="text"] {
     font-size: 15px;
 }
 
+#typed-answer {
+    margin-top: 12px;
+}
+
+#typed-answer:focus {
+    border-color: #176b63;
+    background-color: #e5f4f1;
+    color: #123f3b;
+    outline: 2px solid rgba(23, 107, 99, 0.2);
+}
+
 .section-option {
     display: inline-block;
     margin-right: 15px;
